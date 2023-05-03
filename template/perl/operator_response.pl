@@ -33,6 +33,7 @@ sub LogChangesToGit {
 		}
 
 		$gitLog .= `cd config 2>&1 ; git add -v . 2>&1 ; git commit -m '$action $taskId' . 2>&1 ; git push 2>&1 ; cd "$pwd"`;
+		$gitLog .= `cd html 2>&1 ; git add -v . 2>&1 ; git commit -m '$action $taskId' . 2>&1 ; git push 2>&1 ; cd "$pwd"`;
 	}
 }
 
