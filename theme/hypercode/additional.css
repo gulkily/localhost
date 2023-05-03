@@ -25,5 +25,8 @@ input, textarea {
 	right: 0 !important;
 	margin-top: 5pt !important;
 }
+#spanSignAs {
+	float: right;
+}
 
 /* / theme/hypercode/additional.css */
