@@ -345,3 +345,4 @@ sub GetCalendarPage { # returns calendar page
 } # GetCalendarPage()
 
 1;
+
