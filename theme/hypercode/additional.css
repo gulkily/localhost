@@ -19,5 +19,10 @@ input, textarea {
 	background-color: yellow;
 	border-radius: 0 !important;
 }
+#messages {
+	position: absolute !important;
+	top: 0 !important;
+	right: 0 !important;
+}
 
 /* / theme/hypercode/additional.css */
