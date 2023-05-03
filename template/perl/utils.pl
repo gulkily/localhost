@@ -596,7 +596,9 @@ sub GetMyVersion { # Get the currently checked out version (current commit's has
 
 sub GetHash {
 	my $string = shift;
-	return sha1_hex($string);
+	my $hash = sha1_hex($string);
+	$hash = IsItem($hash);
+	return $hash;
 }
 
 sub GetFileHash { # $fileName ; returns hash of file contents
