@@ -12,5 +12,8 @@ input, textarea {
 #serverResponse {
 	display: none;
 }
+.titlebar {
+	background-image: linear-gradient(to bottom right, #ffffff, #fff0ef) !important;
+}
 
 /* / theme/hypercode/additional.css */
