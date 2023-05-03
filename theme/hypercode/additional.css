@@ -9,5 +9,8 @@ input, textarea {
 	border: 2pt solid #404040 !important;
 	margin-top: 2pt !important;
 }
+#serverResponse {
+	display: none;
+}
 
 /* / theme/hypercode/additional.css */
