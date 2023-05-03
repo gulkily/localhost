@@ -23,6 +23,7 @@ input, textarea {
 	position: absolute !important;
 	top: 0 !important;
 	right: 0 !important;
+	margin-top: 5pt !important;
 }
 
 /* / theme/hypercode/additional.css */
