@@ -96,7 +96,7 @@ sub GetOperatorResponse {
 		#`bash hike.sh refresh`;
 		return 'ok, I made the site less colorful';
 	}
-	if ($query =~ m/inbox+top/) {
+	if ($query =~ m/inbox+.top/) {
 		PutConfig('setting/html/css_inbox_top', 1);
 		#`bash hike.sh refresh`;
 		return 'ok, I put the inbox dialog at the top of the page';
