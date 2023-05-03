@@ -610,7 +610,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									require_once('operator_response.pl');
 
 									my $action = $tokenFound{'param'};
-									my $taskId = sha1_hex($tokenFound{'param'});
+									my $taskId = substr(sha1_hex($tokenFound{'param'}), 0, 8);
 
 									my $gitLog = '';
 
@@ -621,7 +621,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										} else {
 											#todo bad
 										}
-										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
+										$gitLog .= `cd config ; git add -v . ; git commit -m '$action $taskId' . ; git push ; cd "$pwd"`;
 										$gitLog .= "\n\n";
 										$gitLog .= "===";
 										$gitLog .= "\n\n";
@@ -636,7 +636,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 										} else {
 											#todo bad
 										}
-										$gitLog .= `cd config ; git add -v . ; git commit -m 'task $taskId' . ; git push ; cd "$pwd"`;
+										$gitLog .= `cd config ; git add -v . ; git commit -m '$action $taskId' . ; git push ; cd "$pwd"`;
 									}
 
 									my $response = '';
