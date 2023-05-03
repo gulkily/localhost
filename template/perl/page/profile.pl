@@ -102,3 +102,4 @@ sub GetProfilePage { # returns profile page (allows sign in/out)
 } # GetProfilePage()
 
 1;
+
