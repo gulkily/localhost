@@ -15,5 +15,9 @@ input, textarea {
 .titlebar {
 	background-image: linear-gradient(to bottom right, #ffffff, #fff0ef) !important;
 }
+#loadingIndicator, #ariaAlert {
+	background-color: yellow;
+	border-radius: 0 !important;
+}
 
 /* / theme/hypercode/additional.css */
