@@ -7,6 +7,7 @@
 # performs basic state validation whenever run
 # 
 
+
 $ENV{PATH}="/bin:/usr/bin"; #this is needed for -T to work
 
 #freebsd: $ENV{PATH}="/bin:/usr/bin:/usr/local/bin"; #this is needed for -T to work
@@ -221,11 +222,6 @@ sub GetDir { # $dirName ; returns path to special directory specified
 	if ($dirName eq 'log') {
 		WriteLog('GetDir: return ' . $scriptDir . '/log');
 		return $scriptDir . '/log';
-	}
-
-	if ($dirName eq 'once') {
-		WriteLog('GetDir: return ' . $scriptDir . '/once');
-		return $scriptDir . '/once';
 	}
 
 	WriteLog('GetDir: warning: fallthrough on $dirName = ' . $dirName);
@@ -593,13 +589,6 @@ sub GetMyVersion { # Get the currently checked out version (current commit's has
 	chomp($myVersion);
 	return $myVersion;
 } # GetMyVersion()
-
-sub GetHash {
-	my $string = shift;
-	my $hash = sha1_hex($string);
-	$hash = IsItem($hash);
-	return $hash;
-}
 
 sub GetFileHash { # $fileName ; returns hash of file contents
 # sub GetItemHash {
@@ -1402,29 +1391,6 @@ sub ReplaceStrings { # automatically replaces strings in html with looked up val
 	return $content;
 } # ReplaceStrings()
 
-sub GetOnce { # $hash
-	#todo sanity
-	my $hash = shift;
-	#todo sanity
-#
-#	if (!IsHash($hash)) {
-#		$hash = GetHash($hash);
-#	}
-
-	WriteLog('GetOnce: $hash = ' . $hash);
-
-	my $DIR = GetDir('once');
-
-	if (file_exists("$DIR/$hash.log")) {
-		WriteLog('GetOnce: already done');
-		return 0;
-	} else {
-		WriteLog('GetOnce: not done yet! do it now!');
-		PutFile("$DIR/$hash.log");
-		return "$DIR/$hash.log";
-	}
-}
-
 sub ServerSign { # $filePath
 	return '';
 	#todo sanity
@@ -1960,11 +1926,6 @@ sub IsSaneFilename {
 	}
 } # IsSaneFilename()
 
-sub IsHash {
-	my $string = shift;
-	return IsItem($string);
-}
-
 sub IsItem { # $string ; returns untained string, 0 if not item
 #sub IsHash {
 # should be called IsValidItemHash {
@@ -2142,7 +2103,7 @@ sub CheckForInstalledVersionChange {
 				$currVersion = $1;
 			}
 			my $changeLogListCommand = "git log --oneline $lastVersion..$currVersion";
-			my $changeLogList = `$changeLogListCommand`;
+			my $changeLogList = ''; # `$changeLogListCommand`;
 			$changeLogList = trim($changeLogList);
 			$changeLogMessage .= "$changeLogList";
 		} else {
@@ -2270,7 +2231,6 @@ sub IsFileDeleted { # $file, $fileHash ; checks for file's hash in deleted.log a
 } # IsFileDeleted()
 
 sub file_exists { # $file ; port of php file_exists()
-# sub FileExists {
 	my $file = shift;
 	if (!$file) {
 		return 0;

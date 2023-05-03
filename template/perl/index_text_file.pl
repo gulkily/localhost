@@ -610,7 +610,7 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 									require_once('operator_response.pl');
 
 									my $action = $tokenFound{'param'};
-									my $taskId = GetHash($tokenFound{'param'});
+									my $taskId = sha1_hex($tokenFound{'param'});
 
 									my $gitLog = '';
 
