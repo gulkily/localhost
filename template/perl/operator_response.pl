@@ -129,10 +129,10 @@ sub GetOperatorResponse {
 		return 'ok, I added a basic image board';
 	}
 	if ($query eq 'add basic javascript' || $query eq 'add javascript support' || $query eq 'enable javascript') {
-		AddToMenu('settings');
+		#AddToMenu('settings');
 		PutConfig('setting/admin/js/enable', 1);
 		`bash hike.sh frontend`;
-		return 'ok, I added a basic javascript, including live timestamps, in-place voting buttons, and a settings page';
+		return 'ok, I added a basic javascript, including live timestamps, in-place voting buttons. a settings page is available on request.';
 	}
 	if ($query eq 'add page loading indicator' || $query eq 'add loading indicator' || $query =~ m/progress.+indicator/) {
 		PutConfig('setting/admin/js/loading', 1);
