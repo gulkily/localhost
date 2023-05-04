@@ -8,10 +8,10 @@ server.modules += (
 #todo split this up into different features?
 
 # typically html/
-server.document-root = "/home/ilyag/pollyanna/html/" 
+server.document-root = "$serverDocumentRoot" 
 
 # default port for local dev
-server.port = 2784 
+server.port = $serverPort 
 
 # max request field size
 server.max-request-field-size = 16384 
@@ -72,7 +72,7 @@ dir-listing.activate = "enable"
 # typically under html/error/
 # build.pl will put absolute path here
 # #todo this should have a working predefined value
-server.errorfile-prefix = "/home/ilyag/pollyanna/html/error/error-"
+server.errorfile-prefix = "$errorFilePrefix"
 
 # when url-ctrls-reject is enabled, it interferes with submitting text via GET
 server.http-parseopts = (
@@ -84,55 +84,3 @@ server.http-parseopts = (
 expire.url = (
 	"/" => "access plus 10 minutes"
 )
-
-# php fastcgi connector
-# template/lighttpd/lighttpd_php.conf.template
-fastcgi.server = (
-	".php" => (
-		(
-			"bin-path" => "/bin/php-cgi",
-			"socket" => "/tmp/php.socket"
-		)
-	)
-)
-# / template/lighttpd/lighttpd_php.conf.template
-
-# template/lighttpd/lighttpd_php_rewrite_all.conf.template
-
-# php rewrites
-
-# this template is used when:
-# # config/setting/admin/lighttpd/enabled=1
-# # config/setting/admin/php/enabled=1
-# # config/setting/admin/php/rewrite=all
-
-url.rewrite = (
-	# always for post.html
-	"^/post.html\??(.+)?" => "/post.php?$1",
-	#"^/upload.html\??(.+)?" => "/upload.php?$1",
-	#"^/write.html\??(.+)?" => "/write.php?$1",
-	# "^/chat.html\??(.+)?" => "/quick.php?$1",
-
-	########################
-	# php supported on all html urls
-	# BUT less accessible static failover
-	# includes urls without query in route.php requests
-	# this mode is useful if you require registration
-	
-	"^(.+\.html)\??(.+)?" => "/route.php?path=$1&$2",
-	"^(.+)\/$" => "/route.php?path=$1/index.html",
-	"^\/$" => "/route.php?path=/index.html",
-	#"^([0-9a-f]{40})$" => "/route.php?path=$1",
-	#"^([0-9a-f]{8})$" => "/route.php?path=$1",
-
-	#"^(.+\.gif)$" => "/route.php?path=$1",
-
-	#
-	# this line is uncommented by templater #hack
-	#"(.+)" => "/route.php?path=$1" # admin/php/url_alias_friendly
-	#
-
-	"^/\?q=(.+)" => "/route.php?q=$1"
-)
-
-# / template/lighttpd/lighttpd_php_rewrite_all.conf.template
