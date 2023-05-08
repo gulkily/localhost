@@ -1508,6 +1508,11 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 # $itemType = type of item (currently 'txt' is supported)
 # $verifyError = whether there was an error with gpg verification of item
 
+# notes:
+# does not return until the end unless there is an error
+# if you're looking for a good place to e.g. patch in MakePage(),
+# you can append it all the way at the bottom
+
 	state $query;
 	state @queryParams;
 
@@ -1645,6 +1650,9 @@ sub DBAddItem { # $filePath, $fileName, $authorKey, $fileHash, $itemType, $verif
 	if ($verifyError) {
 		DBAddItemAttribute($fileHash, 'verify_error', '1');
 	}
+
+	require_once('makepage.pl');
+	MakePage('chain');
 } # DBAddItem()
 
 sub DBAddLocationRecord { # $itemHash, $latitude, $longitude, $signedBy ; Adds new location record from latlong token
