@@ -126,14 +126,14 @@ sub GetItemListingPage { # $pageQuery, $pageMode (dialog_list, full_items, dialo
 		$html .= GetDialogX($paginationLinks, 'Pages');
 	}
 
+
+	$html .= GetQuerySqlDialog($pageQuery);
+
 	if ($pageQuery eq 'chain') {
 		#special case hack for chain page
 		$html .= GetDialogX('<a href="/chain.log">chain.log</a>', 'Log');
-		$html .= GetDialogX('<iframe height=300 width=400 src="/chain.log"></iframe>', 'Log');
 		# $html .= '<span class=advanced>' . GetDialogX('<a href="/chain.log">chain.log</a>', 'Log') . '</span>'; #should be called GetDialog? #todo
 	}
-
-	$html .= GetQuerySqlDialog($pageQuery);
 
 	if ($pageQuery eq 'boxes') { #banana theme
 		$html .= GetDialogX(GetTemplate('html/dialog/new_box_count.template'), 'Add');
