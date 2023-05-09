@@ -9,6 +9,10 @@ sub AddToMenu { # $menuItem
 	my $menuItem = shift;
 	chomp $menuItem;
 
+	#todo sanity checks
+
+	WriteLog("AddToMenu($menuItem)");
+
 	my $existingMenu = GetTemplate('list/menu');
 	if ($existingMenu =~ m/^$menuItem/im) {
 		# already exists
