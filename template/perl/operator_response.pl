@@ -13,7 +13,7 @@ sub AddToMenu { # $menuItem
 		# already exists
 	} else {
 		my $newMenu = $existingMenu . "\n" . $menuItem;
-		PutFile(GetDir('config') . '/theme/hypercode/template/list/menu', $newMenu);
+		PutFile(GetDir('config') . '/template/list/menu', $newMenu);
 		`bash hike.sh page write`;
 	}
 }

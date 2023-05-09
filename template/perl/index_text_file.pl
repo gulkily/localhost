@@ -685,8 +685,12 @@ sub IndexTextFile { # $file | 'flush' ; indexes one text file into database
 						}
 						WriteLog('IndexTextFile: $voteTime = ' . $voteTime);
 
-						DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); #'hashtag'
-					} # title, access_log_hash, http, https, alt, name, self_timestamp
+						if ($tokenFound{'hashtag'}) {
+							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'hashtag'}); #'hashtag'
+						} else {
+							DBAddVoteRecord($fileHash, $voteTime, $tokenFound{'token'}); #'hashtag'
+						}
+					} # title, access_log_hash, http, https, alt, name, self_timestamp, operator_please
 					else {
 						WriteLog('IndexTextFile: warning: token not found in @validTokens, sanity check failed; caller = ' . join(',', caller));
 					}
