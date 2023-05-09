@@ -23,8 +23,3 @@ sub GetWelcomePage {
 }
 
 1;
-
-
-
-
-
